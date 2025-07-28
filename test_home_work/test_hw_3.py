@@ -4,7 +4,7 @@ import string
 from selene import browser, be, by, have
 
 
-def test_search_true():
+def test_search_true(setup):
     browser.open('https://ya.ru/')
     # Проблема showcaptcha решается переоткрыванием вкладки
     if browser.element('html').wait_until(have.text('Подтвердите, что запросы отправляли вы, а не робот')):
@@ -14,7 +14,7 @@ def test_search_true():
     browser.element(by.id('search-result')).should(have.text('yashaka/selene: User-oriented Web UI browser tests'))
 
 
-def test_search_false():
+def test_search_false(setup):
     browser.open('https://ya.ru/')
     # Проблема showcaptcha решается переоткрыванием вкладки
     if browser.element('html').wait_until(have.text('Подтвердите, что запросы отправляли вы, а не робот')):
