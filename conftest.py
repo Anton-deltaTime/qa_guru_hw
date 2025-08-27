@@ -12,7 +12,7 @@ def setup():
     options.add_argument('Connection=keep-alive')
     browser.config.driver_options = options
 
-    browser.config.window_width = 1024
-    browser.config.window_height = 768
+    browser.config.window_width = 1600
+    browser.config.window_height = 900
     yield
     browser.quit()
