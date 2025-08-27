@@ -6,7 +6,7 @@ def test_dark_theme_by_time():
     Протестируйте правильность переключения темной темы на сайте в зависимости от времени
     """
     current_time = time(hour=23)
-    # TODO переключите темную тему в зависимости от времени суток (с 22 до 6 часов утра - ночь)
+    # переключите темную тему в зависимости от времени суток (с 22 до 6 часов утра - ночь)
 
     if current_time.hour < 6 or current_time.hour >= 22:
         is_dark_theme = True
@@ -26,7 +26,7 @@ def test_dark_theme_by_time_and_user_choice():
     """
     current_time = time(hour=16)
     dark_theme_enabled_by_user = True
-    # TODO переключите темную тему в зависимости от времени суток,
+    # переключите темную тему в зависимости от времени суток,
     #  но учтите что темная тема может быть включена вручную
 
     if dark_theme_enabled_by_user is None:
@@ -49,7 +49,7 @@ def test_find_suitable_user():
         {"name": "Maria", "age": 18},
     ]
 
-    # TODO найдите пользователя с именем "Olga"
+    # найдите пользователя с именем "Olga"
     suitable_users = None
     for user in users:
         if user.get("name", '') == "Olga":
@@ -57,7 +57,7 @@ def test_find_suitable_user():
             break
     assert suitable_users == {"name": "Olga", "age": 45}
 
-    # TODO найдите всех пользователей младше 20 лет
+    # найдите всех пользователей младше 20 лет
     suitable_users = [u for u in users if u['age'] < 20]
     suitable_users = sorted(suitable_users, key=lambda u: u['age'])
     assert suitable_users == [
@@ -86,6 +86,7 @@ def test_readable_function():
 def print_func(func: callable, *args) -> str:
     name_func: str = func.__name__
     result = f"{name_func.replace('_', ' ').title()} [{', '.join(args)}]"
+    print(result)
     return result
 
 
