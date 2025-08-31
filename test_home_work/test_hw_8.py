@@ -1,6 +1,6 @@
 import pytest
 
-from test_home_work.models.homework_8 import Cart, Product
+from models.model_hw_8 import Cart, Product
 
 
 @pytest.fixture

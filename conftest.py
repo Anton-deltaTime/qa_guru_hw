@@ -13,6 +13,6 @@ def setup():
     browser.config.driver_options = options
 
     browser.config.window_width = 1600
-    browser.config.window_height = 900
+    browser.config.window_height = 1000
     yield
     browser.quit()

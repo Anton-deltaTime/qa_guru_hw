@@ -1,7 +1,7 @@
 import os
 import random
 
-from selene import browser, be, have, Element
+from selene import browser, be, have
 
 
 def test_fill_form(setup):
@@ -60,7 +60,7 @@ def test_fill_form(setup):
     browser.element('#react-select-4-input').type('Panipat').press_enter()
 
     # Загрузка файла
-    path_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'any_files/file_hw_5.txt'))
+    path_file = os.path.abspath(os.path.join(os.getcwd(), 'any_files/file_hw_5.txt'))
     browser.element('#uploadPicture').send_keys(path_file)
     file_name = os.path.split(path_file)[-1]
 
