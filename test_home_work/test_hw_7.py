@@ -8,7 +8,7 @@ from pypdf import PdfReader
 import requests
 from selene import browser, query
 
-DIR_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'any_files'))
+DIR_PATH = os.path.abspath(os.path.join(os.getcwd(), 'any_files'))
 
 
 def download_pdf_file():
