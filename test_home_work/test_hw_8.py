@@ -4,12 +4,12 @@ from test_home_work.models.homework_8 import Cart, Product
 
 
 @pytest.fixture
-def product():
+def product() -> Product:
     return Product("book", 100, "This is a book", 1000)
 
 
 @pytest.fixture
-def cart():
+def cart() -> Cart:
     return Cart()
 
 
@@ -52,7 +52,7 @@ class TestProducts:
 class TestCart:
 
     @pytest.fixture
-    def products(self):
+    def products(self) -> (Product, Product):
         book = Product("book", 10, "This is a book", 100)
         pen = Product("pen", 2, "This is a pen", 1000)
         return book, pen
