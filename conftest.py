@@ -36,7 +36,7 @@ def setup(request):
         with allure.step('Настройка selenoid для options'):
             selenoid_capabilities = {
                 "browserName": "chrome",
-                "browserVersion": "128.0",
+                "browserVersion": "127.0",
                 "selenoid:options": {
                     "enableVNC": True,
                     "enableVideo": True,
