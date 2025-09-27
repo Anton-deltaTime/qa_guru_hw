@@ -2,6 +2,7 @@ import os
 import pytest
 import subprocess
 
+import allure
 from dotenv import load_dotenv
 from selene import browser
 from selenium import webdriver
@@ -25,20 +26,19 @@ def setup(request):
     options = webdriver.ChromeOptions()
 
     if get_location == 'jenkins':
-        print('Настройка для selenoid')
         selenoid_login = os.getenv("SELENOID_LOGIN")
         selenoid_password = os.getenv("SELENOID_PASSWORD")
-
-        selenoid_capabilities = {
-            "browserName": "chrome",
-            "browserVersion": "128.0",
-            "selenoid:options": {
-                "enableVNC": True,
-                "enableVideo": True,
-                "enableLog": True
+        with allure.step('Настройка selenoid для options'):
+            selenoid_capabilities = {
+                "browserName": "chrome",
+                "browserVersion": "128.0",
+                "selenoid:options": {
+                    "enableVNC": True,
+                    "enableVideo": True,
+                    "enableLog": True
+                }
             }
-        }
-        options.capabilities.update(selenoid_capabilities)
+            options.capabilities.update(selenoid_capabilities)
 
         driver = webdriver.Remote(
             command_executor=f"https://{selenoid_login}:{selenoid_password}@selenoid.autotests.cloud/wd/hub",
