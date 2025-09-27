@@ -11,7 +11,7 @@ from utils import attach
 
 
 def pytest_addoption(parser):
-    parser.addoption("--loc", action="store", default="local", choices=['local', 'jenkins'], help="'local' or 'jenkins', test launch location")
+    parser.addoption("--loc", action="store", default="local", help="'local' or 'jenkins', test launch location")
 
 
 @pytest.fixture(scope="session", autouse=True)
