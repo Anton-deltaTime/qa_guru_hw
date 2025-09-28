@@ -9,9 +9,12 @@ from selenium import webdriver
 
 from utils import attach
 
+DEFAULT_BROWSER_VERSION = "127.0"
+
 
 def pytest_addoption(parser):
     parser.addoption("--loc", action="store", default="local", help="'local' or 'jenkins', test launch location")
+    parser.addoption("--browser_version", action="store", default="127.0")
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -31,12 +34,16 @@ def setup(request):
     options.add_argument('--ignore-ssl-errors')
 
     if get_location == 'jenkins':
+        browser_version = request.config.getoption("--browser_version")
+        browser_version = browser_version if browser_version else DEFAULT_BROWSER_VERSION
+
         selenoid_login = os.getenv("SELENOID_LOGIN")
         selenoid_password = os.getenv("SELENOID_PASSWORD")
+        selenoid_url = os.getenv("SELENOID_URL")
         with allure.step('Настройка selenoid для options'):
             selenoid_capabilities = {
                 "browserName": "chrome",
-                "browserVersion": "125.0",
+                "browserVersion": browser_version,
                 "selenoid:options": {
                     "enableVNC": True,
                     "enableVideo": True,
@@ -46,7 +53,7 @@ def setup(request):
             options.capabilities.update(selenoid_capabilities)
 
         driver = webdriver.Remote(
-            command_executor=f"https://{selenoid_login}:{selenoid_password}@selenoid.autotests.cloud/wd/hub",
+            command_executor=f"https://{selenoid_login}:{selenoid_password}@{selenoid_url}",
             options=options)
         browser.config.driver = driver
 
