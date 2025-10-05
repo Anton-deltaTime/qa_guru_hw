@@ -7,6 +7,7 @@ class GitHubPage:
         self.button_search = browser.element('.search-input')
         self.search = browser.element('#query-builder-test')
         self.actions = browser.element('#actions-tab')
+        self.navigation = browser.element('.Button-content')
 
     def open(self):
         browser.open('https://github.com')
@@ -21,6 +22,14 @@ class GitHubPage:
     @staticmethod
     def link_open(value: str):
         browser.element(by.link_text(value)).click()
+
+    @staticmethod
+    def search_text_click(value: str):
+        browser.element(by.text(value)).click()
+
+    @staticmethod
+    def click_element(element):
+        element.click()
 
     def open_actions(self):
         self.actions.click()
