@@ -1,9 +1,11 @@
+from functools import partial
 import os
 import pytest
 import subprocess
 
 import allure
 from dotenv import load_dotenv
+import requests
 from selene import browser
 from selenium import webdriver
 
@@ -67,6 +69,19 @@ def setup(request):
     attach.add_video(browser)
 
     browser.quit()
+
+
+@pytest.fixture()
+def send_request(request):
+    with allure.step('Подготовка запроса в API reqres.in'):
+        method = request.param[0]
+        endpoint = request.param[1]
+
+        headers = {"x-api-key": "reqres-free-v1"}
+        url = f"https://reqres.in/{endpoint}"
+
+        request = partial(getattr(requests, method), url=url, headers=headers)
+    return request
 
 
 def pytest_sessionfinish(session, exitstatus):
